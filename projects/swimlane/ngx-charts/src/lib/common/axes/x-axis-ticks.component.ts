@@ -28,7 +28,14 @@ import { reduceTicks } from './ticks.helper';
           [attr.transform]="textTransform"
           [style.font-size]="'12px'"
         >
-          {{ tickTrim(tickFormat(tick)) }}
+          <ng-container *ngIf="!containsLineBreak(tickFormat(tick)); else multiLineTemplate">
+            {{ tickTrim(tickFormat(tick)) }}
+          </ng-container>
+          <ng-template #multiLineTemplate>
+            <ng-container *ngFor="let line of tickSplit(tickFormat(tick)); let first = first">
+              <svg:tspan x="0" [attr.dy]="first ? '-6px' : '12px'">{{ line }}</svg:tspan>
+            </ng-container>
+          </ng-template>
         </svg:text>
       </svg:g>
     </svg:g>
@@ -200,5 +207,13 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   tickTrim(label: string): string {
     return this.trimTicks ? trimLabel(label, this.maxTickLength) : label;
+  }
+
+  containsLineBreak(label: string): boolean {
+    return !!/\r|\n/.exec(label);
+  }
+
+  tickSplit(label: string): string[] {
+    return label.split(/\n\r|\n|\r|\r\n/);
   }
 }

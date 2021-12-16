@@ -147,12 +147,12 @@ export class SeriesHorizontal implements OnChanges {
         }
         bar.y = this.yScale(label);
       } else if (this.type === 'stacked') {
-        const offset0 = d0[d0Type];
-        const offset1 = offset0 + value;
+        const offset0 = 0;
+        const offset1 = d0[d0Type] + value;
         d0[d0Type] += value;
 
-        bar.width = this.xScale(offset1) - this.xScale(offset0);
-        bar.x = this.xScale(offset0);
+        bar.width = Math.abs(this.xScale(offset1) - this.xScale(offset0));
+        bar.x = this.xScale(offset0) - (value > 0 ? 0 : bar.width);
         bar.y = 0;
         bar.offset0 = offset0;
         bar.offset1 = offset1;
@@ -207,7 +207,7 @@ export class SeriesHorizontal implements OnChanges {
       `;
 
       return bar;
-    });
+    }).reverse();
 
     this.updateDataLabels();
   }

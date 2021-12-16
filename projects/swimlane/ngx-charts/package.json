@@ -1,6 +1,6 @@
 {
   "name": "@yociduo/ngx-charts",
-  "version": "17.0.1",
+  "version": "17.0.3",
   "description": "Declarative Charting Framework for Angular",
   "repository": {
     "type": "git",

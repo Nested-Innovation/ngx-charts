@@ -80,6 +80,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [seriesName]="group.name"
             [animations]="animations"
             [noBarWhenZero]="noBarWhenZero"
+            [roundEdges]="roundEdges"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -130,6 +131,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() roundEdges: boolean = false;
   @Input() yScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;

@@ -176,8 +176,8 @@ export class BarComponent implements OnChanges {
   getRadius(): number {
     let radius = 0;
 
-    if (this.roundEdges && this.height > 5 && this.width > 5) {
-      radius = Math.floor(Math.min(5, this.height / 2, this.width / 2));
+    if (this.roundEdges && Math.abs(this.height) > 5 && Math.abs(this.width) > 5) {
+      radius = Math.floor(Math.min(20, Math.abs(this.height) / 2, Math.abs(this.width) / 2));
     }
 
     return radius;
@@ -196,15 +196,15 @@ export class BarComponent implements OnChanges {
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         if (this.data.value > 0) {
-          edges = [true, true, false, false];
+          edges = [false, true, false, false];
         } else {
-          edges = [false, false, true, true];
+          edges = [false, false, false, true];
         }
       } else if (this.orientation === 'horizontal') {
         if (this.data.value > 0) {
-          edges = [false, true, false, true];
+          edges = [false, true, false, false];
         } else {
-          edges = [true, false, true, false];
+          edges = [true, false, false, false];
         }
       }
     }

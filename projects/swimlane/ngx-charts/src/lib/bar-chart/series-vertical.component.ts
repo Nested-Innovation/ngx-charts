@@ -152,13 +152,13 @@ export class SeriesVerticalComponent implements OnChanges {
           bar.y = this.yScale(value);
         }
       } else if (this.type === 'stacked') {
-        const offset0 = d0[d0Type];
-        const offset1 = offset0 + value;
+        const offset0 = 0;
+        const offset1 = d0[d0Type] + value;
         d0[d0Type] += value;
 
-        bar.height = this.yScale(offset0) - this.yScale(offset1);
+        bar.height = Math.abs(this.yScale(offset0) - this.yScale(offset1));
         bar.x = 0;
-        bar.y = this.yScale(offset1);
+        bar.y = this.yScale(offset1) - (value > 0 ? 0 : bar.height);
         bar.offset0 = offset0;
         bar.offset1 = offset1;
       } else if (this.type === 'normalized') {
@@ -212,7 +212,7 @@ export class SeriesVerticalComponent implements OnChanges {
       `;
 
       return bar;
-    });
+    }).reverse();
 
     this.updateDataLabels();
   }

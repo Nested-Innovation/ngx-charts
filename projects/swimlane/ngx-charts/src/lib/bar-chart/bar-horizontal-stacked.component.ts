@@ -81,6 +81,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [showDataLabel]="showDataLabel"
             [dataLabelFormatting]="dataLabelFormatting"
             [noBarWhenZero]="noBarWhenZero"
+            [roundEdges]="roundEdges"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -131,6 +132,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() roundEdges: boolean = false;
   @Input() xScaleMax: number;
   @Input() showDataLabel: boolean = false;
   @Input() dataLabelFormatting: any;
